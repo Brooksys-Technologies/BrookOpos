@@ -1,0 +1,471 @@
+# kv_start
+#######:import Factory kivy.factory.Factory
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+
+
+####################### css start ################
+
+<Label>:
+    font_name: 'Roboto'
+    markup: True
+    bold: True
+<ExitButton@Button>:
+    size_hint_x: None
+    size_hint_y: None
+    pos_hint: {'center_x':.5}
+    height: 60
+    width: 60
+    font_name: 'Roboto'
+    bold: True
+<ActionBar>:
+    padding: '2sp'
+    canvas:
+        Color:
+            rgba: self.background_color
+        BorderImage:
+            pos: self.pos
+            size: self.size
+            source: self.background_image
+
+######### window css start ############3
+
+<LandingPage>:
+    name: 'landingpage'
+    
+    timestamp: timestamp
+
+    GridLayout: # parent window has to scale entire screen
+        cols:1
+
+        canvas.before:
+            Color:
+                rgba: 1,1,1,1
+
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        size: root.width, root.height
+        padding:.7
+        spacing: .7
+
+        GridLayout:# TOP BAR WINDOW
+
+            canvas.before:
+                Color:
+                    rgba: 0.1,.39,.41,1
+
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            size_hint: (.2,.06) # sizing of Top Bar
+            cols:3
+            BoxLayout:
+                orientation: 'vertical'
+                size: root.width, root.height
+
+                Label:
+                    id: timestamp
+                    text: '[b]00[/b]:00:00'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size: root.width, root.height
+
+                Label:
+                    id: header
+                    text: "Brook OPoS: The Customer Friendly Point of Sale "
+            BoxLayout:
+                orientation: 'vertical'
+                size: root.width, root.height
+
+                Image:
+                    id: ulogo
+                    size_hint: (1,1)
+                    source: "logo.png"
+                    allow_stretch: True
+
+
+        GridLayout: # parent to company Logo and User Tabs
+            #acts  as the border color
+            cols:2
+            padding: 2
+            spacing: 2
+
+            canvas.before:
+                Color:
+                    rgba: 0.7,.39,.41,1
+
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            GridLayout: #Logo image place holder
+                cols: 1
+                padding: 10
+                size_hint: (.4,1)
+                canvas.before:
+                    Color:
+                        rgba: 1,1,1,1
+
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                Image:
+                    source: "bmts-logo-web-01.png"
+                    allow_stretch: True
+
+
+            GridLayout: # Holder for the User/exit & help icons
+                cols: 1
+                size_hint_x:.2
+                background_normal: ''
+
+
+                canvas.before:
+                    Color:
+                        rgba: 229/255,233/255,238/255,1
+
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
+                GridLayout: #Holds User icons
+                    cols: 2
+                    size_hint: (.4,.3)
+                    spacing: 10
+                    padding: 10
+                    Button:
+                        id: admin
+                        text: "Admin"
+                        on_press: app.open_popup()
+                        #on_release:
+                        #    app.root.current = 'employeelogin'
+                        #    root.manager.transition.direction = 'left'
+
+                    Button:
+                        id: manager
+                        text: "Manager"
+                        on_press: app.open_popup()
+
+                        #on_release: Factory.MyPopup().open()#       root.open_popup()
+
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+
+                    Button:
+                        id: employee
+                        text: "Employee"
+                        on_press: app.open_popup()
+
+                BoxLayout: # This will be use to hold exit button icon
+                    orientation: 'vertical'
+                    size_hint:(0.3,0.133)
+                    padding: 10
+
+                    ExitButton:
+                        size_hint: (1,None)
+                        height: 35
+                        text: "Exit"
+                        on_press: app.open_exit_dialog()
+#                        on_press: quit()
+
+
+        GridLayout:# Footer
+
+            canvas.before:
+                Color:
+                    rgba: 0.1,.39,.41,1
+
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+            size_hint: (.6,.05) # sizing of Footer
+            cols:3
+
+            Label:
+                text: "What is the time"
+
+            Label:
+                text: "System Name"
+
+            Image:
+                source: "logo.png"
+                allow_stretch: True
+
+
+
+<EmployeeLogin>:
+
+    name: "employeelogin"
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        Label:
+            text: "Popup Stuff"
+            font_size: 32
+
+        Button:
+            text: "Popup"
+            font_size: 32
+            #on_release: Factory.MyPopup().open()#       root.open_popup()
+            on_press: root.open_popup()
+
+
+
+
+
+
+
+################## PROFILE PAGE ############################
+
+<ProfileWindow>:
+    name: 'Profile'
+
+    canvas.before:
+        Color:
+            rgba: .94,1,.9, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+
+        ActionBar:
+            pos: (0,0)
+            size_hint: (1, 0.1)
+            background_color: 0, .02, .9, .5
+
+            ActionView:
+                id: av
+
+                ActionPrevious:
+                    with_previous: False
+                    title: 'Business Name '
+                    app_icon: ''
+
+                ActionButton:
+                    id: btn_SignOut
+                    text: ''
+                    icon:
+                        'icons/signout.png'
+                    on_release:
+                        app.root.current = 'landingpage'
+                        root.manager.transition.direction = 'right'
+
+                ActionButton:
+                    id: btn_SignOut
+                    text: ''
+                    icon: 'icons/profile.png'
+                    on_release:
+                        app.root.current = 'landingpage'
+                        app.root.get_screen('Profile').manager.transition.direction = 'right'
+
+
+
+        Label:
+            color: 1, 0, 0, 1
+            text: 'This will be your profile page'
+            font_size: 40
+
+################## End of Window Css ########################3
+
+
+####################### CSS END ##################################33
+
+###################################  MaiN Layout DEF #########################
+
+<ExitPopup@Popup>
+    auto_dismiss: True
+    size_hint: (.3,.3)
+    title: "OK to EXIT ?"
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size: root.width, root.height
+
+        paddding: 20
+        spacing: 20
+
+        #adding two buttons for exit
+
+        Button:
+            text: 'Yes'
+            size_hint: (.5, .5)
+            font_size: 32
+            pos_hint: {"center_x": 0.5}
+            on_release: app.program_exit()
+
+        Button:
+            text: 'No'
+            size_hint: (.5, .5)
+            font_size: 32
+            pos_hint: {"center_x": 0.5}
+            on_press: app.close_exit_popup()
+
+<MyPopup@Popup>
+    auto_dismiss:True# Click anywhere to dismiss popup
+    size_hint: (.4,.6)
+    #pos_hint: {'x': 0.2, 'top':0.9}
+    title: " Enter Your PIN"
+
+    BoxLayout:
+        orientation: "vertical"
+        #size_hint: (.4, .6)
+        #size: root.width, root.height # make it fit whole window widget
+        padding: 10
+        spacing: 10
+
+
+        TextInput:
+            id: calc_input
+            text: "Enter Pin"
+            background_normal: ''
+            background_color: 0.7,.71,0.7,1
+            halign: "center" #align to the right hand side
+            multiline: False
+            font_size: 45
+            size_hint: (1, .15) # Dynamic sizing with fit whole width
+
+
+
+
+        GridLayout:
+            cols: 3
+            rows: 4
+            size_hint: (1,.5)
+
+
+            # row 2
+            Button:
+                text: "7"
+                on_press: app.button_press(7)
+
+            Button:
+                text: "8"
+                on_press: app.button_press(8)
+
+            Button:
+                text: "9"
+                on_press: app.button_press(9)
+
+
+            # row 3
+            Button:
+                text: "4"
+                on_press: app.button_press(4)
+
+            Button:
+                text: "5"
+                on_press: app.button_press(5)
+
+            Button:
+                text: "6"
+                on_press: app.button_press(6)
+
+
+            # row 4
+            Button:
+                text: "1"
+                on_press: app.button_press(1)
+
+            Button:
+                text: "2"
+                on_press: app.button_press(2)
+
+            Button:
+                text: "3"
+                on_press: app.button_press(3)
+
+
+            # row 5
+            Button:
+
+                id: backspace_button
+                #setting the button to the size of button image
+                size_hint: .15,.2
+                #setting button position to center of screen
+                background_normal: ''
+                background_color: 0.7,.71,0.7,1
+                pos_hint: {'center_x': 0.5}
+                on_press: app.backspace()
+                on_release: app.hello_off()
+
+                Image:
+                    id: my_image
+                    source: 'icons/backspace_down.png'
+                    # Setting the image to be at center of button
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+
+
+            Button:
+                text: "0"
+                on_press: app.button_press(0)
+
+
+            Button:
+                id: submit
+                text: "OK"
+                font_size: 44
+                color: 0,0,0,1
+                background_normal: ""
+                background_color: 0.7,.71,0.7,1
+                #on_press: app.equals()
+                on_press:
+                    app.root.login()
+
+                #on_release: root.dismiss()
+                #on_release: app.ok_off()
+                on_release:
+                    app.root.current = 'Profile' if app.root.login() == True else 'landingpage'
+                    ###########3 Money shot ##############################
+                    app.root.get_screen('landingpage').manager.transition.direction = 'left'
+                    app.close_popup()
+
+
+
+######################################### PIN Login Handler ######################################
+
+WindowManager:
+    #transition: SlideTransition(direction='left')
+    LandingPage:
+    #transition: SlideTransition(direction='right')
+    ProfileWindow:
+    # transition: SlideTransition(direction='left'
+    EmployeeLogin:
+
+# kv_end
